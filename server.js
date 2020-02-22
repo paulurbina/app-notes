@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const expHandl = require('express-handlebars')
+const morgan = require('morgan')
+const methodOverride = require('method-override')
 
 const app = express()
 
@@ -18,7 +20,8 @@ app.set('view engine', '.hbs')
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'src/public')))
-
+app.use(morgan('dev'))
+app.use(methodOverride('_method'))
 
 app.use(require('./src/routes/index.routes'))
 app.use(require('./src/routes/notes.routes'))

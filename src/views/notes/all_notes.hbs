@@ -1,0 +1,19 @@
+{{#each notes}}
+<div class="col-md-3">
+    <div class="card" style="width: 20rem;">
+
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{description}}</p>
+            <a href="/notes/edit/{{id}}" class="btn btn-primary">Edit Note</a><br>
+            
+            <form action="/notes/delete/{{id}}?_method=DELETE" method="POST" class="btn btn-danger">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+{{/each}}
