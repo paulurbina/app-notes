@@ -11,6 +11,7 @@ notes.createNewNote = async (req, res) => {
         title, description
     })
     await note.save()
+    req.flash('success_msg', 'Note add success')
     res.redirect('/notes/all')
 }
 
@@ -26,7 +27,9 @@ notes.renderEditForm = async (req, res) => {
 
 notes.updateNote = async (req, res) => {
     const { title, description } = req.body
-    const note = await Note.findByIdAndUpdate(req.params.id, { title, description })
+    await Note.findByIdAndUpdate(req.params.id, { title, description })
+    req.flash('success_msg', 'Note update success')
+
     res.redirect('/notes/all')
 
 }
@@ -34,6 +37,7 @@ notes.updateNote = async (req, res) => {
 notes.deleteNote = async (req, res) => {
     const id = req.params.id
     await Note.findByIdAndDelete(id)
+    req.flash('success_msg', 'Note delete success')
     res.redirect('/notes/all')
 }
 
