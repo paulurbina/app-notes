@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
 }, {
     timestamps: true
 })
@@ -25,7 +25,7 @@ UserSchema.methods.encrypPassw = async password => {
 }
 
 UserSchema.methods.matchPassw = async function (password) {
-    await bcryptjs.compare(password, this.password)
+    return await bcryptjs.compare(password, this.password)
 }
 
 module.exports = model('User', UserSchema)

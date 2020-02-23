@@ -47,13 +47,15 @@ user.renderLogin = (req, res) => {
 }
 
 user.login = passport.authenticate('local', {
-    failureRedirect: '/users/login',
     successRedirect: '/notes/all',
+    failureRedirect: '/users/login',
     failureFlash: true
 })
 
 user.logout = (req, res) => {
-
+    req.logout()
+    req.flash('success_msg', 'You are logged out now!')
+    res.redirect('/users/login')
 }
 
 module.exports = user
