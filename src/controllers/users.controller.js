@@ -1,6 +1,8 @@
 const user = {} || null
 const User = require('../models/User')
 
+const passport = require('passport')
+
 user.renderRegister = (req, res) => {
     res.render('users/register')
 }
@@ -44,9 +46,11 @@ user.renderLogin = (req, res) => {
     res.render('users/login')
 }
 
-user.login = (req, res) => {
-    
-}
+user.login = passport.authenticate('local', {
+    failureRedirect: '/users/login',
+    successRedirect: '/notes/all',
+    failureFlash: true
+})
 
 user.logout = (req, res) => {
 
