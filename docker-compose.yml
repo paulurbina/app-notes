@@ -1,0 +1,29 @@
+version: "3"
+services: 
+  web:
+    build: .
+    container_name: note-app
+    restart: always
+    ports: 
+      - "4000:4000"
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/c/Users/paulu/Desktop/app-notes/gcf-serv-vm-e130e2e526e3.json
+    depends_on:
+      - mongo
+    volumes: 
+      - .:/usr/src/app
+    networks:
+      - app-notes
+
+  mongo:
+    container_name: mydatabase
+    image: mongo
+    restart: unless-stopped
+    ports: 
+      - "27017:27017"
+    networks:
+      - app-notes
+
+networks: 
+  app-notes:
+    driver: bridge
